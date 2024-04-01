@@ -41,6 +41,31 @@ app.post("/register", (req, res) => {
       res.send({ message: "User added" });
       //Test it
       // User has not been submitted we need to use express
+      //Successful
+    }
+  });
+});
+
+// Now we need to login with these credentials
+app.post("/login", (req, res) => {
+  const sentloginUserName = req.body.LoginUserName;
+  const sentLoginPassword = req.body.LoginPassword;
+
+  //SQL Statement to insert user to database table
+  const SQL = "SELECT * FROM users WHERE username = ? && password = ?";
+  //Send values through variable
+  const Values = [sentloginUserName, sentLoginPassword];
+
+  //Query to execute sql statement
+  db.query(SQL, Values, (err, results) => {
+    if (err) {
+      res.send({ error: err });
+    }
+    if (results.length > 0) {
+      res.send(results);
+    } else {
+      res.send({ message: `Credentials Don't match` });
+      // this should be good, lets try it
     }
   });
 });

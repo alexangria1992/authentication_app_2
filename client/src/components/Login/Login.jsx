@@ -5,8 +5,26 @@ import { AiOutlineSwapRight } from "react-icons/ai";
 import "../../App.css";
 import "./Login.css";
 import video from "../../LoginAssets/video.mp4";
+import { useState } from "react";
+import Axios from "axios";
 
 const Login = () => {
+  const [loginUserName, setLoginUsername] = useState("");
+  const [loginPassword, setLoginPassword] = useState("");
+
+  //onclick lets user know inputs have been entered
+  const loginUser = (e) => {
+    e.preventDefault();
+    //Require  Axios to create an API that connecs to the server
+    Axios.post("http://localhost:3002/login", {
+      // create variable to send to the server through the route
+      LoginUserName: loginUserName,
+      LoginPassword: loginPassword,
+    }).then((response) => {
+      console.log(response);
+    });
+  };
+
   return (
     <div className="loginPage flex">
       <div className="container flex">
@@ -30,12 +48,19 @@ const Login = () => {
             <h3>Welcome back</h3>
           </div>
           <form action="" className="form grid">
-            <span className="showMessage">Login Status will go here</span>
+            {/* <span className="message">Login Status will go here</span> */}
             <div className="inputDiv">
               <label htmlFor="username">Username</label>
               <div className="input flex">
                 <FaUserShield className="icon" />
-                <input type="text" id="username" placeholder="Enter username" />
+                <input
+                  type="text"
+                  id="username"
+                  placeholder="Enter username"
+                  onChange={(e) => {
+                    setLoginUsername(e.target.value);
+                  }}
+                />
               </div>
             </div>
             <div className="inputDiv">
@@ -46,10 +71,13 @@ const Login = () => {
                   type="password"
                   id="password"
                   placeholder="Enter password"
+                  onChange={(e) => {
+                    setLoginPassword(e.target.value);
+                  }}
                 />
               </div>
             </div>
-            <button type="submit" className="btn flex">
+            <button type="submit" className="btn flex" onClick={loginUser}>
               <span>Login</span>
               <AiOutlineSwapRight className="icon" />
             </button>
