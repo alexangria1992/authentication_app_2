@@ -71,7 +71,7 @@ const Register = () => {
                 <FaUserShield className="icon" />
                 <input
                   type="name"
-                  id="email"
+                  id="name"
                   placeholder="Enter username"
                   onChange={(e) => {
                     setUsername(e.target.value);
