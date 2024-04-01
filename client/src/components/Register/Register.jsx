@@ -12,16 +12,16 @@ import Axios from "axios";
 const Register = () => {
   //Inputs State
   const [email, setEmail] = useState("");
-  const [username, setUsername] = useState("");
+  const [userName, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
   //onclick lets user know inputs have been entered
   const createUser = () => {
     //Require  Axios to create an API that connecs to the server
-    Axios.post("http://localhost/3002/register", {
+    Axios.post("http://localhost:3002/register", {
       // create variable to send to the server through the route
       Email: email,
-      UserName: username,
+      UserName: userName,
       Password: password,
     }).then(() => {
       console.log("User has been created");

@@ -5,6 +5,8 @@ const mysql = require("mysql");
 const cors = require("cors");
 const colors = require("colors");
 
+app.use(express.json());
+app.use(cors());
 // run server
 app.listen(3002, () => {
   console.log(colors.cyan("Server is running on port 3002"));
@@ -26,7 +28,7 @@ app.post("/register", (req, res) => {
   const sentPassword = req.body.Password;
 
   //SQL Statement to insert user to database table
-  const SQL = "INSERT INTO ssers (email, username, password) VALUES (?, ?, ?)";
+  const SQL = "INSERT INTO users (email, username, password) VALUES (?,?,?)";
   //Send values through variable
   const Values = [sentEmail, sentUserName, sentPassword];
 
